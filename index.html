@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowApp - Agência Criativa com Portfólio Visual</title>
+    <meta name="description" content="Criamos, desenvolvemos e impulsionamos presenças digitais com resultados mensuráveis. Confira nosso portfólio de fotos e designs.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #0a0a1a;
+            --secondary: #141432;
+            --accent: #00f5d4;
+            --accent-light: #4dfee8;
+            --accent-dark: #00c4a7;
+            --text: #e0e0e0;
+            --text-light: #a0a0b0;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            --gradient-dark: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Tipografia */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--accent-light);
+        }
+        
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 245, 212, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--accent);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 245, 212, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
+            margin-right: 12px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 245, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 245, 212, 0.05) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .hero-visual {
+            position: relative;
+            height: 400px;
+            background: var(--secondary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .graphic-element {
+            width: 300px;
+            height: 300px;
+            background: 
+                radial-gradient(circle at center, var(--accent) 0%, transparent 70%),
+                conic-gradient(from 0deg, var(--accent) 0%, var(--accent-light) 30%, transparent 30%, transparent 100%);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Seções */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        /* Métricas */
+        .metrics {
+            background-color: var(--secondary);
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent);
+        }
+        
+        .metric-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .metric-label {
+            color: var(--text-light);
+        }
+        
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .chart-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .chart-card h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--secondary);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Portfólio Visual */
+        .portfolio {
+            background-color: var(--secondary);
+        }
+        
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 50px;
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--gradient);
+            color: var(--primary);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .portfolio-item {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 26, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay h3 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .portfolio-overlay p {
+            text-align: center;
+            color: var(--text-light);
+        }
+        
+        /* Flyers e Campanhas */
+        .campaigns {
+            background-color: var(--primary);
+        }
+        
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .campaign-card {
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 350px;
+            background: var(--secondary);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .campaign-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .campaign-img {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+        }
+        
+        .campaign-info {
+            padding: 20px;
+            height: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .campaign-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Clientes */
+        .clients {
+            background-color: var(--secondary);
+        }
+        
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .client-logo {
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            transition: var(--transition);
+        }
+        
+        .client-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Contato Rápido */
+        .quick-contact {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .quick-contact h2 {
+            margin-bottom: 20px;
+        }
+        
+        .quick-contact p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--text-light);
+        }
+        
+        .contact-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .contact-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            min-width: 200px;
+            transition: var(--transition);
+        }
+        
+        .contact-option:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            background: rgba(0, 245, 212, 0.1);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .contact-option h4 {
+            margin-bottom: 10px;
+        }
+        
+        .contact-option p {
+            margin: 0;
+            color: var(--text-light);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-light);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-visual {
+                order: -1;
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--secondary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .hero-stats {
+                justify-content: space-around;
+            }
+            
+            .portfolio-grid,
+            .campaigns-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .service-card,
+            .metric-card {
+                padding: 25px 20px;
+            }
+            
+            .contact-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-option {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .portfolio-grid,
+            .campaigns-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">F</div>
+                <div class="logo-text">FlowApp</div>
+            </div>
+            <div class="mobile-menu">☰</div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#metrics">Métricas</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio Visual</a></li>
+                <li><a href="#campaigns">Campanhas</a></li>
+                <li><a href="#contact" class="btn btn-primary">Contato Rápido</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Resultados que Impulsionam seu Negócio</h1>
+                    <p>Da ideia ao crescimento mensurável: criamos, desenvolvemos e impulsionamos presenças digitais com foco em performance.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary">Solicitar Consultoria Gratuita</a>
+                        <a href="#portfolio" class="btn btn-secondary">Ver Portfólio</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">+150</div>
+                            <div class="stat-label">Projetos Entregues</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">+90%</div>
+                            <div class="stat-label">Satisfação do Cliente</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">+300%</div>
+                            <div class="stat-label">Crescimento Médio</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="graphic-element"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Métricas -->
+    <section class="metrics" id="metrics">
+        <div class="container">
+            <div class="section-title">
+                <h2>Resultados Mensuráveis</h2>
+                <p>Nossas métricas falam por si - transformamos dados em crescimento real</p>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">🚀</div>
+                    <div class="metric-number">+240%</div>
+                    <div class="metric-label">Aumento Médio em Tráfego</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">💼</div>
+                    <div class="metric-number">+150%</div>
+                    <div class="metric-label">Crescimento em Conversões</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">📈</div>
+                    <div class="metric-number">+180%</div>
+                    <div class="metric-label">Aumento em Receita</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">⏱️</div>
+                    <div class="metric-number">-60%</div>
+                    <div class="metric-label">Redução no Custo de Aquisição</div>
+                </div>
+            </div>
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Desempenho de Tráfego</h3>
+                    <canvas id="trafficChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Conversões por Canal</h3>
+                    <canvas id="conversionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossas Soluções</h2>
+                <p>Serviços integrados para impulsionar seu negócio digital</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Branding & Identidade Visual</h3>
+                    <p>Criamos identidades visuais marcantes que comunicam a essência da sua marca e geram conexão com seu público.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Desenvolvimento Web & Apps</h3>
+                    <p>Desenvolvemos sites e aplicativos modernos, responsivos e de alta performance, focados na experiência do usuário.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Marketing Digital</h3>
+                    <p>Estratégias de marketing digital personalizadas para impulsionar sua presença online e gerar resultados mensuráveis.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Gestão de Redes Sociais</h3>
+                    <p>Gerenciamos suas redes sociais com conteúdo estratégico para engajar seu público e fortalecer sua marca.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📸</div>
+                    <h3>Fotografia Profissional</h3>
+                    <p>Sessões fotográficas criativas para produtos, serviços e pessoas que contam a história da sua marca.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Design de Campanhas</h3>
+                    <p>Criação de flyers, banners e materiais promocionais que geram engajamento e conversão nas redes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio Visual -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Portfólio Visual</h2>
+                <p>Confira alguns dos nossos trabalhos de fotografia e produção visual</p>
+            </div>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="fotografia">Fotografia</button>
+                <button class="filter-btn" data-filter="produto">Produto</button>
+                <button class="filter-btn" data-filter="eventos">Eventos</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="fotografia">
+                    <div class="portfolio-img" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
+                    <div class="portfolio-overlay">
+                        <h3>Sessão Corporativa</h3>
+                        <p>Fotografia profissional para empresa de tecnologia</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="produto">
+                    <div class="portfolio-img" style="background: linear-gradient(45deg, #f093fb, #f5576c);"></div>
+                    <div class="portfolio-overlay">
+                        <h3>Linha de Cosméticos</h3>
+                        <p>Fotografia de produto para e-commerce</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="eventos">
+                    <div class="portfolio-img" style="background: linear-gradient(45deg, #4facfe, #00f2fe);"></div>
+                    <div class="portfolio-overlay">
+                        <h3>Evento de Lançamento</h3>
+                        <p>Cobertura fotográfica completa</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="fotografia">
+                    <div class="portfolio-img" style="background: linear-gradient(45deg, #43e97b, #38f9d7);"></div>
+                    <div class="portfolio-overlay">
+                        <h3>Retrato Empresarial</h3>
+                        <p>Sessão para executivos</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="produto">
+                    <div class="portfolio-img" style="background: linear-gradient(45deg, #fa709a, #fee140);"></div>
+                    <div class="portfolio-overlay">
+                        <h3>Campanha de Moda</h3>
+                        <p>Fotografia para coleção outono/inverno</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="eventos">
+                    <div class="portfolio-img" style="background: linear-gradient(45deg, #a8edea, #fed6e3);"></div>
+                    <div class="portfolio-overlay">
+                        <h3>Workshop Criativo</h3>
+                        <p>Registro de evento corporativo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flyers e Campanhas -->
+    <section class="campaigns" id="campaigns">
+        <div class="container">
+            <div class="section-title">
+                <h2>Campanhas em Destaque</h2>
+                <p>Flyers e materiais que criamos e que viralizaram nas redes</p>
+            </div>
+            <div class="campaigns-grid">
+                <div class="campaign-card">
+                    <div class="campaign-img" style="background: linear-gradient(45deg, #ff9a9e, #fad0c4);"></div>
+                    <div class="campaign-info">
+                        <h4>Promoção Verão</h4>
+                        <p>Campanha para marca de roupas</p>
+                        <div class="campaign-stats">
+                            <span>👁️ 15.2K visualizações</span>
+                            <span>❤️ 2.3K engajamentos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-card">
+                    <div class="campaign-img" style="background: linear-gradient(45deg, #a1c4fd, #c2e9fb);"></div>
+                    <div class="campaign-info">
+                        <h4>Lançamento App</h4>
+                        <p>Campanha digital para startup</p>
+                        <div class="campaign-stats">
+                            <span>👁️ 22.7K visualizações</span>
+                            <span>❤️ 3.1K engajamentos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-card">
+                    <div class="campaign-img" style="background: linear-gradient(45deg, #d4fc79, #96e6a1);"></div>
+                    <div class="campaign-info">
+                        <h4>Evento Fitness</h4>
+                        <p>Flyer para maratona corporativa</p>
+                        <div class="campaign-stats">
+                            <span>👁️ 18.5K visualizações</span>
+                            <span>❤️ 2.8K engajamentos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-card">
+                    <div class="campaign-img" style="background: linear-gradient(45deg, #f6d365, #fda085);"></div>
+                    <div class="campaign-info">
+                        <h4>Black Friday</h4>
+                        <p>Campanha promocional para e-commerce</p>
+                        <div class="campaign-stats">
+                            <span>👁️ 45.3K visualizações</span>
+                            <span>❤️ 5.7K engajamentos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clientes -->
+    <section class="clients" id="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2>Clientes que Confiam na FlowApp</h2>
+                <p>Empresas que alcançaram resultados extraordinários com nossa parceria</p>
+            </div>
+            <div class="clients-grid">
+                <div class="client-logo">TechCorp</div>
+                <div class="client-logo">InovaStart</div>
+                <div class="client-logo">GlobalBiz</div>
+                <div class="client-logo">NextLevel</div>
+                <div class="client-logo">VisionCo</div>
+                <div class="client-logo">FutureTech</div>
+            </div>
+            <div class="testimonials">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "A FlowApp transformou nossa presença digital. Em 3 meses, nosso tráfego aumentou 300% e as conversões quadruplicaram. Parceria essencial para nosso crescimento."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Maria Costa</h4>
+                            <p>CEO, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Trabalhamos com várias agências antes, mas a FlowApp foi a única que realmente entendeu nosso negócio e entregou resultados consistentes e mensuráveis."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <h4>Ricardo Silva</h4>
+                            <p>Diretor de Marketing, InovaStart</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As sessões fotográficas e materiais de campanha criados pela FlowApp elevaram nossa identidade visual a outro patamar. Recomendo totalmente!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AF</div>
+                        <div class="author-info">
+                            <h4>Ana Ferreira</h4>
+                            <p>Fundadora, GlobalBiz</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Rápido -->
+    <section class="quick-contact" id="contact">
+        <div class="container">
+            <h2>Pronto para Transformar seu Negócio?</h2>
+            <p>Entre em contato conosco hoje mesmo e agende uma consultoria gratuita para descobrir como podemos impulsionar seus resultados.</p>
+            <a href="#" class="btn btn-primary">Agendar Consultoria Gratuita</a>
+            
+            <div class="contact-options">
+                <div class="contact-option">
+                    <div class="contact-icon">📞</div>
+                    <h4>Ligue Agora</h4>
+                    <p>(11) 99999-9999</p>
+                </div>
+                <div class="contact-option">
+                    <div class="contact-icon">💬</div>
+                    <h4>WhatsApp</h4>
+                    <p>Conversa Rápida</p>
+                </div>
+                <div class="contact-option">
+                    <div class="contact-icon">📧</div>
+                    <h4>Email</h4>
+                    <p>contato@flowapp.com</p>
+                </div>
+                <div class="contact-option">
+                    <div class="contact-icon">🕒</div>
+                    <h4>Reunião Online</h4>
+                    <p>Agende uma Call</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo">
+                        <div class="logo-icon">F</div>
+                        <div class="logo-text">FlowApp</div>
+                    </div>
+                    <p>Transformamos ideias em marcas fortes e projetos em resultados mensuráveis.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">ig</a>
+                        <a href="#" class="social-link">fb</a>
+                        <a href="#" class="social-link">tw</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Serviços</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Branding</a></li>
+                        <li><a href="#">Desenvolvimento Web</a></li>
+                        <li><a href="#">Marketing Digital</a></li>
+                        <li><a href="#">Fotografia</a></li>
+                        <li><a href="#">Design de Campanhas</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Empresa</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="#">Portfólio</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Carreiras</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul class="footer-links">
+                        <li>contato@flowapp.com</li>
+                        <li>(11) 99999-9999</li>
+                        <li>São Paulo, Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FlowApp. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para imagens -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img class="modal-img" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        // Menu Mobile
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Gráficos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gráfico de Tráfego
+            const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+            const trafficChart = new Chart(trafficCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                    datasets: [{
+                        label: 'Tráfego Orgânico',
+                        data: [1200, 1900, 3000, 5000, 7000, 8000],
+                        borderColor: '#00f5d4',
+                        backgroundColor: 'rgba(0, 245, 212, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Tráfego Pago',
+                        data: [800, 1200, 2000, 3500, 4500, 6000],
+                        borderColor: '#4dfee8',
+                        backgroundColor: 'rgba(77, 254, 232, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#e0e0e0'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#a0a0b0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#a0a0b0'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Gráfico de Conversões
+            const conversionCtx = document.getElementById('conversionChart').getContext('2d');
+            const conversionChart = new Chart(conversionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Orgânico', 'Social Media', 'Email', 'Pago'],
+                    datasets: [{
+                        data: [35, 25, 20, 20],
+                        backgroundColor: [
+                            '#00f5d4',
+                            '#4dfee8',
+                            '#00c4a7',
+                            '#009e85'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#e0e0e0',
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Filtros do portfólio
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class de todos os botões
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Adiciona active class ao botão clicado
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Animação de contadores
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + '+';
+                }
+            }, 16);
+        }
+        
+        // Iniciar animação quando a seção de métricas estiver visível
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = document.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.textContent);
+                        animateCounter(counter, target, 2000);
+                    });
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(document.querySelector('.hero-stats'));
+        
+        // Modal para imagens
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.querySelector('.modal-img');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Adicionar evento de clique para abrir o modal (exemplo)
+        // Na implementação real, você conectaria isso às imagens do portfólio
+        document.querySelectorAll('.portfolio-item, .campaign-card').forEach(item => {
+            item.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                // Aqui você definiria a imagem real no modalImg.src
+            });
+        });
+        
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
