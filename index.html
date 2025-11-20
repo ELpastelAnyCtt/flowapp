@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowApp - Agência Criativa com Portfólio Visual</title>
-    <meta name="description" content="Criamos, desenvolvemos e impulsionamos presenças digitais com resultados mensuráveis. Confira nosso portfólio de fotos e designs.">
+    <title>FlowApp - Agência de Marketing Digital e Desenvolvimento</title>
+    <meta name="description" content="Criamos, desenvolvemos e impulsionamos presenças digitais com resultados mensuráveis. Solicite uma consultoria gratuita.">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0a0a16;
-            --secondary: #121225;
-            --accent: #7b61ff;
-            --accent-light: #9d8aff;
-            --accent-dark: #5a42cc;
-            --text: #f5f5f7;
+            --primary: #0a0a1a;
+            --secondary: #141432;
+            --accent: #00f5d4;
+            --accent-light: #4dfee8;
+            --accent-dark: #00c4a7;
+            --text: #e0e0e0;
             --text-light: #a0a0b0;
             --white: #ffffff;
             --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             --gradient-dark: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --border-radius: 12px;
-            --section-padding: 120px 0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
         }
         
         html {
@@ -42,11 +38,17 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
         }
         
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Tipografia */
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1rem;
@@ -66,14 +68,6 @@
         
         p {
             margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
         
         a {
@@ -88,10 +82,8 @@
         
         /* Botões */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 32px;
+            display: inline-block;
+            padding: 14px 32px;
             border-radius: 50px;
             font-weight: 600;
             text-align: center;
@@ -99,35 +91,17 @@
             transition: var(--transition);
             border: none;
             font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
         }
         
         .btn-primary {
             background: var(--gradient);
-            color: var(--white);
-            box-shadow: 0 4px 15px rgba(123, 97, 255, 0.3);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(123, 97, 255, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 245, 212, 0.4);
         }
         
         .btn-secondary {
@@ -137,25 +111,19 @@
         }
         
         .btn-secondary:hover {
-            background: rgba(123, 97, 255, 0.1);
+            background: rgba(0, 245, 212, 0.1);
             transform: translateY(-3px);
         }
         
         /* Header */
         header {
-            background-color: rgba(10, 10, 22, 0.95);
+            background-color: rgba(10, 10, 26, 0.95);
             backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             z-index: 1000;
-            padding: 20px 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
-        }
-        
-        header.scrolled {
             padding: 15px 0;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
         }
         
         .header-container {
@@ -170,25 +138,24 @@
         }
         
         .logo-icon {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             background: var(--gradient);
             border-radius: 10px;
             margin-right: 12px;
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            color: var(--white);
-            font-size: 1.2rem;
-            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
         }
         
         .logo-text {
             font-size: 1.5rem;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--white);
-            font-family: 'Montserrat', sans-serif;
         }
         
         .nav-links {
@@ -204,7 +171,6 @@
             color: var(--text);
             font-weight: 500;
             position: relative;
-            font-family: 'Montserrat', sans-serif;
         }
         
         .nav-links a::after {
@@ -226,12 +192,11 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--white);
         }
         
         /* Hero Section */
         .hero {
-            padding: 200px 0 120px;
+            padding: 180px 0 100px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             position: relative;
             overflow: hidden;
@@ -245,14 +210,14 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(123, 97, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(123, 97, 255, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(0, 245, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 245, 212, 0.05) 0%, transparent 50%);
         }
         
         .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 50px;
             align-items: center;
         }
         
@@ -288,13 +253,12 @@
         
         .stat-number {
             font-size: 2.5rem;
-            font-weight: 800;
+            font-weight: 700;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1;
-            font-family: 'Montserrat', sans-serif;
         }
         
         .stat-label {
@@ -304,8 +268,9 @@
         
         .hero-visual {
             position: relative;
-            height: 450px;
-            border-radius: var(--border-radius);
+            height: 400px;
+            background: var(--secondary);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -313,51 +278,30 @@
             box-shadow: var(--shadow);
         }
         
-        .floating-card {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .graphic-element {
+            width: 300px;
+            height: 300px;
+            background: 
+                radial-gradient(circle at center, var(--accent) 0%, transparent 70%),
+                conic-gradient(from 0deg, var(--accent) 0%, var(--accent-light) 30%, transparent 30%, transparent 100%);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: rotate 20s linear infinite;
         }
         
-        .card-1 {
-            top: 20%;
-            left: 10%;
-            width: 200px;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .card-2 {
-            top: 50%;
-            right: 10%;
-            width: 180px;
-            animation: float 6s ease-in-out infinite 1s;
-        }
-        
-        .card-3 {
-            bottom: 20%;
-            left: 30%;
-            width: 220px;
-            animation: float 6s ease-in-out infinite 2s;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* Seções */
         section {
-            padding: var(--section-padding);
+            padding: 100px 0;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
         
         .section-title h2 {
@@ -392,39 +336,22 @@
         
         .metric-card {
             background: rgba(255, 255, 255, 0.05);
-            padding: 40px 30px;
-            border-radius: var(--border-radius);
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-            transform: scaleX(0);
-            transition: var(--transition);
-        }
-        
-        .metric-card:hover::before {
-            transform: scaleX(1);
         }
         
         .metric-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow);
+            border-color: var(--accent);
         }
         
         .metric-icon {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             margin: 0 auto 20px;
             background: var(--gradient);
             border-radius: 50%;
@@ -432,18 +359,17 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            color: var(--white);
+            color: var(--primary);
         }
         
         .metric-number {
             font-size: 2.5rem;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 10px;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-family: 'Montserrat', sans-serif;
         }
         
         .metric-label {
@@ -459,7 +385,7 @@
         .chart-card {
             background: rgba(255, 255, 255, 0.05);
             padding: 30px;
-            border-radius: var(--border-radius);
+            border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
@@ -478,7 +404,7 @@
         .service-card {
             background: var(--secondary);
             padding: 40px 30px;
-            border-radius: var(--border-radius);
+            border-radius: 15px;
             text-align: center;
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -508,116 +434,25 @@
         }
         
         .service-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto 20px;
             background: var(--gradient);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            color: var(--white);
+            font-size: 1.8rem;
+            color: var(--primary);
         }
         
         .service-card h3 {
             margin-bottom: 15px;
         }
         
-        /* Portfólio Visual */
-        .portfolio {
-            background-color: var(--secondary);
-        }
-        
-        .portfolio-filters {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            border-radius: 50px;
-            color: var(--text);
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-        }
-        
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--gradient);
-            color: var(--white);
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .portfolio-item {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            position: relative;
-            height: 300px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-        
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow);
-        }
-        
-        .portfolio-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 22, 0.8);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-        
-        .portfolio-item:hover .portfolio-img {
-            transform: scale(1.1);
-        }
-        
-        .portfolio-overlay h3 {
-            margin-bottom: 10px;
-            text-align: center;
-        }
-        
-        .portfolio-overlay p {
-            text-align: center;
-            color: var(--text-light);
-        }
-        
         /* Clientes */
         .clients {
-            background-color: var(--primary);
+            background-color: var(--secondary);
         }
         
         .clients-grid {
@@ -653,7 +488,7 @@
         .testimonial-card {
             background: rgba(255, 255, 255, 0.05);
             padding: 30px;
-            border-radius: var(--border-radius);
+            border-radius: 15px;
             border-left: 4px solid var(--accent);
         }
         
@@ -676,9 +511,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: var(--primary);
             font-weight: bold;
-            font-family: 'Montserrat', sans-serif;
         }
         
         .author-info h4 {
@@ -694,7 +528,7 @@
         /* Contato Rápido */
         .quick-contact {
             text-align: center;
-            padding: 100px 0;
+            padding: 80px 0;
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
         
@@ -722,7 +556,7 @@
             align-items: center;
             padding: 30px 20px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--border-radius);
+            border-radius: 15px;
             min-width: 200px;
             transition: var(--transition);
         }
@@ -730,7 +564,7 @@
         .contact-option:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow);
-            background: rgba(123, 97, 255, 0.1);
+            background: rgba(0, 245, 212, 0.1);
         }
         
         .contact-icon {
@@ -742,7 +576,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            color: var(--white);
+            color: var(--primary);
             margin-bottom: 15px;
         }
         
@@ -758,7 +592,7 @@
         /* Footer */
         footer {
             background: var(--secondary);
-            padding: 80px 0 30px;
+            padding: 60px 0 30px;
         }
         
         .footer-content {
@@ -820,7 +654,7 @@
         
         .social-link:hover {
             background: var(--accent);
-            color: var(--white);
+            color: var(--primary);
             transform: translateY(-5px);
         }
         
@@ -830,38 +664,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--text-light);
             font-size: 0.9rem;
-        }
-        
-        /* Back to Top */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            z-index: 999;
-            box-shadow: 0 4px 15px rgba(123, 97, 255, 0.3);
-        }
-        
-        .back-to-top.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(123, 97, 255, 0.5);
         }
         
         /* Responsividade */
@@ -880,17 +682,17 @@
             
             .hero-visual {
                 order: -1;
-                height: 350px;
+                height: 300px;
             }
         }
         
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
-                top: 80px;
+                top: 70px;
                 left: -100%;
                 width: 100%;
-                height: calc(100vh - 80px);
+                height: calc(100vh - 70px);
                 background: var(--secondary);
                 flex-direction: column;
                 align-items: center;
@@ -923,21 +725,6 @@
             .hero-stats {
                 justify-content: space-around;
             }
-            
-            .portfolio-grid,
-            .campaigns-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .contact-options {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .contact-option {
-                width: 100%;
-                max-width: 300px;
-            }
         }
         
         @media (max-width: 576px) {
@@ -950,7 +737,7 @@
             }
             
             section {
-                padding: 80px 0;
+                padding: 70px 0;
             }
             
             .service-card,
@@ -958,20 +745,21 @@
                 padding: 25px 20px;
             }
             
-            .portfolio-grid,
-            .campaigns-grid {
-                grid-template-columns: 1fr;
+            .contact-options {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .hero {
-                padding: 150px 0 80px;
+            .contact-option {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header id="header">
+    <header>
         <div class="container header-container">
             <div class="logo">
                 <div class="logo-icon">F</div>
@@ -982,7 +770,6 @@
                 <li><a href="#home">Início</a></li>
                 <li><a href="#metrics">Métricas</a></li>
                 <li><a href="#services">Serviços</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
                 <li><a href="#clients">Clientes</a></li>
                 <li><a href="#contact" class="btn btn-primary">Contato Rápido</a></li>
             </ul>
@@ -998,7 +785,7 @@
                     <p>Da ideia ao crescimento mensurável: criamos, desenvolvemos e impulsionamos presenças digitais com foco em performance.</p>
                     <div class="hero-btns">
                         <a href="#contact" class="btn btn-primary">Solicitar Consultoria Gratuita</a>
-                        <a href="#portfolio" class="btn btn-secondary">Ver Portfólio</a>
+                        <a href="#metrics" class="btn btn-secondary">Ver Resultados</a>
                     </div>
                     <div class="hero-stats">
                         <div class="stat-item">
@@ -1016,18 +803,7 @@
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <div class="floating-card card-1">
-                        <h4>Branding</h4>
-                        <p>Identidade visual marcante</p>
-                    </div>
-                    <div class="floating-card card-2">
-                        <h4>Marketing</h4>
-                        <p>Estratégias que convertem</p>
-                    </div>
-                    <div class="floating-card card-3">
-                        <h4>Desenvolvimento</h4>
-                        <p>Soluções digitais modernas</p>
-                    </div>
+                    <div class="graphic-element"></div>
                 </div>
             </div>
         </div>
@@ -1104,74 +880,14 @@
                     <p>Gerenciamos suas redes sociais com conteúdo estratégico para engajar seu público e fortalecer sua marca.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">📸</div>
-                    <h3>Fotografia Profissional</h3>
-                    <p>Sessões fotográficas criativas para produtos, serviços e pessoas que contam a história da sua marca.</p>
+                    <div class="service-icon">🔍</div>
+                    <h3>SEO & Performance</h3>
+                    <p>Otimizamos seu site para os mecanismos de busca e implementamos estratégias para melhorar sua performance digital.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🎯</div>
-                    <h3>Design de Campanhas</h3>
-                    <p>Criação de flyers, banners e materiais promocionais que geram engajamento e conversão nas redes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfólio Visual -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <div class="section-title">
-                <h2>Portfólio Visual</h2>
-                <p>Confira alguns dos nossos trabalhos de fotografia e produção visual</p>
-            </div>
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="fotografia">Fotografia</button>
-                <button class="filter-btn" data-filter="produto">Produto</button>
-                <button class="filter-btn" data-filter="eventos">Eventos</button>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="fotografia">
-                    <div class="portfolio-img" style="background: linear-gradient(45deg, #667eea, #764ba2);"></div>
-                    <div class="portfolio-overlay">
-                        <h3>Sessão Corporativa</h3>
-                        <p>Fotografia profissional para empresa de tecnologia</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="produto">
-                    <div class="portfolio-img" style="background: linear-gradient(45deg, #f093fb, #f5576c);"></div>
-                    <div class="portfolio-overlay">
-                        <h3>Linha de Cosméticos</h3>
-                        <p>Fotografia de produto para e-commerce</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="eventos">
-                    <div class="portfolio-img" style="background: linear-gradient(45deg, #4facfe, #00f2fe);"></div>
-                    <div class="portfolio-overlay">
-                        <h3>Evento de Lançamento</h3>
-                        <p>Cobertura fotográfica completa</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="fotografia">
-                    <div class="portfolio-img" style="background: linear-gradient(45deg, #43e97b, #38f9d7);"></div>
-                    <div class="portfolio-overlay">
-                        <h3>Retrato Empresarial</h3>
-                        <p>Sessão para executivos</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="produto">
-                    <div class="portfolio-img" style="background: linear-gradient(45deg, #fa709a, #fee140);"></div>
-                    <div class="portfolio-overlay">
-                        <h3>Campanha de Moda</h3>
-                        <p>Fotografia para coleção outono/inverno</p>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="eventos">
-                    <div class="portfolio-img" style="background: linear-gradient(45deg, #a8edea, #fed6e3);"></div>
-                    <div class="portfolio-overlay">
-                        <h3>Workshop Criativo</h3>
-                        <p>Registro de evento corporativo</p>
-                    </div>
+                    <h3>Tráfego Pago</h3>
+                    <p>Campanhas de tráfego pago estrategicamente planejadas para maximizar seu retorno sobre investimento.</p>
                 </div>
             </div>
         </div>
@@ -1219,7 +935,7 @@
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "As sessões fotográficas e materiais de campanha criados pela FlowApp elevaram nossa identidade visual a outro patamar. Recomendo totalmente!"
+                        "A abordagem data-driven da FlowApp fez toda a diferença. Eles não apenas criaram um site incrível, mas também otimizaram nossa estratégia de marketing para maximizar o ROI."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">AF</div>
@@ -1243,8 +959,8 @@
             <div class="contact-options">
                 <div class="contact-option">
                     <div class="contact-icon">📞</div>
-                    <h4>Contato</h4>
-                    <p>(11)98956-9939</p>
+                    <h4>Ligue Agora</h4>
+                    <p>(11) 99999-9999</p>
                 </div>
                 <div class="contact-option">
                     <div class="contact-icon">💬</div>
@@ -1288,15 +1004,15 @@
                         <li><a href="#">Branding</a></li>
                         <li><a href="#">Desenvolvimento Web</a></li>
                         <li><a href="#">Marketing Digital</a></li>
-                        <li><a href="#">Fotografia</a></li>
-                        <li><a href="#">Design de Campanhas</a></li>
+                        <li><a href="#">Gestão de Redes</a></li>
+                        <li><a href="#">SEO</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Empresa</h4>
                     <ul class="footer-links">
                         <li><a href="#">Sobre Nós</a></li>
-                        <li><a href="#">Portfólio</a></li>
+                        <li><a href="#">Cases</a></li>
                         <li><a href="#">Blog</a></li>
                         <li><a href="#">Carreiras</a></li>
                         <li><a href="#">Contato</a></li>
@@ -1306,7 +1022,7 @@
                     <h4>Contato</h4>
                     <ul class="footer-links">
                         <li>contato@flowapp.com</li>
-                        <li>(11)98956-9939</li>
+                        <li>(11) 99999-9999</li>
                         <li>São Paulo, Brasil</li>
                     </ul>
                 </div>
@@ -1316,11 +1032,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Back to Top -->
-    <div class="back-to-top" id="backToTop">
-        ↑
-    </div>
 
     <script>
         // Menu Mobile
@@ -1338,32 +1049,6 @@
             });
         });
         
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            
-            // Back to top button
-            const backToTop = document.getElementById('backToTop');
-            if (window.scrollY > 300) {
-                backToTop.classList.add('active');
-            } else {
-                backToTop.classList.remove('active');
-            }
-        });
-        
-        // Back to top functionality
-        document.getElementById('backToTop').addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
         // Gráficos
         document.addEventListener('DOMContentLoaded', function() {
             // Gráfico de Tráfego
@@ -1375,15 +1060,15 @@
                     datasets: [{
                         label: 'Tráfego Orgânico',
                         data: [1200, 1900, 3000, 5000, 7000, 8000],
-                        borderColor: '#7b61ff',
-                        backgroundColor: 'rgba(123, 97, 255, 0.1)',
+                        borderColor: '#00f5d4',
+                        backgroundColor: 'rgba(0, 245, 212, 0.1)',
                         tension: 0.4,
                         fill: true
                     }, {
                         label: 'Tráfego Pago',
                         data: [800, 1200, 2000, 3500, 4500, 6000],
-                        borderColor: '#9d8aff',
-                        backgroundColor: 'rgba(157, 138, 255, 0.1)',
+                        borderColor: '#4dfee8',
+                        backgroundColor: 'rgba(77, 254, 232, 0.1)',
                         tension: 0.4,
                         fill: true
                     }]
@@ -1394,7 +1079,7 @@
                         legend: {
                             position: 'top',
                             labels: {
-                                color: '#f5f5f7'
+                                color: '#e0e0e0'
                             }
                         }
                     },
@@ -1429,10 +1114,10 @@
                     datasets: [{
                         data: [35, 25, 20, 20],
                         backgroundColor: [
-                            '#7b61ff',
-                            '#9d8aff',
-                            '#5a42cc',
-                            '#3d2d8a'
+                            '#00f5d4',
+                            '#4dfee8',
+                            '#00c4a7',
+                            '#009e85'
                         ],
                         borderWidth: 0
                     }]
@@ -1443,35 +1128,12 @@
                         legend: {
                             position: 'bottom',
                             labels: {
-                                color: '#f5f5f7',
+                                color: '#e0e0e0',
                                 padding: 20
                             }
                         }
                     }
                 }
-            });
-        });
-        
-        // Filtros do portfólio
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class de todos os botões
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Adiciona active class ao botão clicado
-                button.classList.add('active');
-                
-                const filterValue = button.getAttribute('data-filter');
-                
-                portfolioItems.forEach(item => {
-                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
             });
         });
         
